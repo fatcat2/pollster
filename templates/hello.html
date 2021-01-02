@@ -1,0 +1,121 @@
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+<style>
+    #title {
+        text-align: center;
+        text-decoration: none;
+    }
+</style>
+<script>
+    var counter = 3;
+    function newOption() {
+        var row = document.createElement("DIV");
+        row.setAttribute("class", "row mb-3 justify-content-center");
+        row.setAttribute("id", "row-".concat(counter));
+
+        var col = document.createElement("DIV");
+        col.setAttribute("class", "col-4");
+
+        var inputGroup = document.createElement("DIV");
+        inputGroup.setAttribute("class", "input-group");
+
+        var input = document.createElement("INPUT");
+        input.setAttribute("type", "text");
+        input.setAttribute("class", "form-control");
+        input.setAttribute("placeholder", "Insert text here");
+        input.setAttribute("required", "True");
+        input.setAttribute("name", counter.toString());
+
+        var removeButton = document.createElement("BUTTON");
+        removeButton.setAttribute("id", counter.toString());
+        removeButton.setAttribute("class", "btn btn-outline-secondary");
+        removeButton.setAttribute("onclick", "removeRow(this.id)");
+        removeButton.setAttribute("type", "button");
+
+        var removeText = document.createTextNode("Remove");
+
+        var textnode = document.createTextNode("new option");
+        
+        input.appendChild(textnode);
+        removeButton.appendChild(removeText);
+        inputGroup.append(input);
+        inputGroup.append(removeButton);
+        col.appendChild(inputGroup);
+        row.appendChild(col);
+
+        var form = document.getElementById("form");
+        form.appendChild(row)
+        counter++;
+        console.log(counter);
+    }
+
+    function removeRow(id){
+        var row = document.getElementById("row-".concat(id));
+        row.remove();
+    }
+
+    function submitForm(){
+        var form = document.getElementById("form");
+        form.submit();
+    }
+</script>
+
+<body>
+    <div class="container">
+        <div class="row mb-3 justify-content-center">
+            <div class="col-lg-4 col-sm-10">
+                <h1 id="title"><a href="/" id="title">pollhead</a></h1>
+            </div>
+        </div>
+        <form id="form" action="{{ url_for('create_poll_route') }}" method="POST">
+            <div class="row mb-3 justify-content-center" id="row-title">
+                <div class="col-lg-4 col-sm-10">
+                    <label for="title-input" class="form-label">Title</label>
+                    <div class="input-group">
+                        <input type="text" name="title" class="form-control" placeholder="Title" id="title-input">
+                    </div>  
+                </div>
+            </div>
+            <div class="row mb-3 justify-content-center" id="row-1">
+                <div class="col-lg-4 col-sm-10">
+                    <div class="input-group">
+                        <input name="1" type="text" class="form-control" placeholder="Insert text here">
+                        <button class="btn btn-outline-secondary" type="button" id="1" onclick="removeRow(this.id)">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3 justify-content-center" id="row-2">
+                <div class="col-lg-4 col-sm-10">
+                    <div class="input-group">
+                        <input name="2" type="text" class="form-control" placeholder="Insert text here">
+                        <button class="btn btn-outline-secondary" type="button" id="2" onclick="removeRow(this.id)">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row mb-3 justify-content-center">
+            <div class="col-lg-4 col-sm-10 mx-auto d-grid gap-2">
+                <button type="button" class="btn btn-primary" onclick="newOption()">Add option</button>
+                <button type="submit" class="btn btn-success" onclick="submitForm()">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+
+</html>
