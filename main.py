@@ -55,6 +55,7 @@ async def get_poll_route(id):
 async def vote_route(id):
 
     form = await request.form
+    print([k for k in form.keys()])
     vote = form["vote"]
 
     conn = get_database_connection()
@@ -90,6 +91,10 @@ async def results_route(id):
     print(poll_results)
 
     return await render_template("results.html", poll_title=poll_title, poll_results=json.dumps(poll_results))
+
+@app.route("/about", methods=["GET"])
+async def about_route():
+    return await render_template("about.html")
 
 
 if __name__ == "__main__":
