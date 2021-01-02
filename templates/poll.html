@@ -11,12 +11,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>pollster: vote on {{poll_title}}</title>
+    <link rel="shortcut icon" type="image/jpg" href="https://ryanjchen.com/favicon.ico"/>
 </head>
 <style>
     #title {
         text-align: center;
         text-decoration: none;
+    }
+    
+    #about{
+        text-align: center;
     }
 </style>
 <script>
@@ -42,14 +47,14 @@
             </div>
             <div class="row mb-3 justify-content-center" id="row-1">
                 <div class="col-lg-4 col-sm-8">
+                    <div class="list-group">
                     {% for option in options -%}
-                    <div class="form-check">
-                        <input value="{{option}}" name="vote" type="radio" class="form-check-input" id="{{option}}">
-                        <label class="form-check-label" for="{{option}}">
-                            {{option}}
-                        </label>
-                    </div>
+                    <label class="list-group-item">
+                        <input name="vote" class="form-check-input me-1" type="radio" value="{{option}}">
+                        {{option}}
+                    </label>
                     {% endfor %}
+                    </div>
                 </div>
             </div>
         </form>
@@ -72,6 +77,11 @@
                     Copied!
                 </div>
                 <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="row mb-3 justify-content-center">
+            <div class="col-lg-4 col-sm-10 mx-auto d-grid gap-2" id="about">
+                <a href="/about"><button type="button" class="btn btn-secondary-outlined">About</button></a>
             </div>
         </div>
 
